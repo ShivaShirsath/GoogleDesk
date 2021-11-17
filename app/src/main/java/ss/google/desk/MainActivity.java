@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 					refreshWebView(
 						item.getTitle().toString().equals("Search")
 						? GoogleLinks.BASE.replace(".", "")
-						: item.getTitle().toString().toLowerCase() + GoogleLinks.BASE
+						: item.getTitle().toString().toLowerCase().replace(" ", "") + GoogleLinks.BASE
 					);
 					drawer_layout.closeDrawers();
 					return true;
@@ -144,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
 		webSettings.setJavaScriptEnabled(JavaScriptEnabled);
 
-		//webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36");
-		//webSettings.setUserAgentString("Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Mobile Safari/537.36");
 		webSettings.setUserAgentString(
 			webSettings.getUserAgentString()
 			.replace(
@@ -166,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 		webSettings.setJavaScriptCanOpenWindowsAutomatically(JavaScriptCanOpenWindowsAutomatically);
 		webSettings.setLoadsImagesAutomatically(LoadsImagesAutomatically);
 
-		webView.setInitialScale(1);
+		webView.setInitialScale(0);
 		webSettings.setLoadWithOverviewMode(LoadWithOverviewMode);
 		webSettings.setUseWideViewPort(UseWideViewPort);
 
