@@ -2,22 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/item_user"
-            android:title="@string/user_name" />
-        <item
-            android:id="@+id/item_newRepo"
-            android:title="New" />
-        <item
-            android:id="@+id/item_repo"
-            android:title="Repositories" />
-        <item
-            android:id="@+id/item_project"
-            android:title="Projects" />
-
-        <item
-            android:id="@+id/item_package"
-            android:title="Packages" />
+        <item android:title="Search" />   
+		<item android:title="My Account" />
+		<item android:title="Play" />
+		<item android:title="Maps" />
+		<item android:title="Photos" />
+		<item android:title="Meet" />
+		<item android:title="Mail" />
+		<item android:title="Drive" />
+		<item android:title="Translate" />
+		<item android:title="Contacts" />
+		<item android:title="Duo" />
+		<item android:title="Classroom" />
+		<item android:title="Keep" />
+		<item android:title="Docs" />
+		<item android:title="Sheets" />
+		<item android:title="Slides" />
+		<item android:title="Forms" />
+		<item android:title="Chat" />
+		<item android:title="Calendar" />
+		<item android:title="Assistant" />
+		<item android:title="Sites" />
 
     </group>
 

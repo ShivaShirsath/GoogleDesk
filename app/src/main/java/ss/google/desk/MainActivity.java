@@ -1,4 +1,4 @@
-package ss.dark.GitHub;
+package ss.google.desk;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -52,12 +52,7 @@ public class MainActivity extends AppCompatActivity {
 	AllowContentAccess = true,
 	DomStorageEnabled = true;
 
-	private String
-	git = "https://github.com/", 
-	user = "ShivaShirsath",
-	tab = "?tab=",
-	link = git + user, 
-	CM;
+	private String CM, link = GoogleLinks.BASE;
 
 	private ValueCallback<Uri> UM;
 	private ValueCallback<Uri[]> UMA;
@@ -99,33 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
 		left_nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 				@Override
-				public boolean onNavigationItemSelected(MenuItem item) {
-					if ((!item.getTitle().equals(user)) && item.getItemId() == R.id.item_user)
-						item.setTitle(user);
-					switch (item.getItemId()) {
-						case R.id.item_user:
-							link = git + item.getTitle();
-							break;
-						case R.id.item_newRepo:
-							link = git + String.valueOf(item.getTitle()).toLowerCase();
-							break;
-						case R.id.item_repo:
-							link = git + user + tab + String.valueOf(item.getTitle()).toLowerCase();
-							break;
-						case R.id.item_project:
-							link = git + user + tab + String.valueOf(item.getTitle()).toLowerCase();
-							break;
-						case R.id.item_package:
-							link = git + user + tab + String.valueOf(item.getTitle()).toLowerCase();
-							break;
-						case R.id.item_settings:
-							link = git + String.valueOf(item.getTitle()).toLowerCase();
-							break;
-						default:
-							Toast.makeText(MainActivity.this, "Invalid", Toast.LENGTH_SHORT).show();
-					}
-					refreshWebView(link);
-
+				public boolean onNavigationItemSelected(MenuItem item) {			
+					refreshWebView(
+						item.getTitle().toString().equals("Search")
+						? GoogleLinks.BASE.replace(".", "")
+						: item.getTitle().toString().toLowerCase() + GoogleLinks.BASE
+					);
 					drawer_layout.closeDrawers();
 					return true;
 				}
@@ -169,22 +143,22 @@ public class MainActivity extends AppCompatActivity {
 	private void refreshWebView(String url) {
 
 		webSettings.setJavaScriptEnabled(JavaScriptEnabled);
-		
-		webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36");
+
+		//webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36");
 		//webSettings.setUserAgentString("Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Mobile Safari/537.36");
-		/*webSettings.setUserAgentString(
-		 webSettings.getUserAgentString()
-		 .replace(
-		 webSettings.getUserAgentString()
-		 .substring(
-		 webSettings.getUserAgentString().indexOf("("),
-		 webSettings.getUserAgentString().indexOf(")") + 1
-		 ),
-		 DesktopMode 
-		 ? "(Macintosh; Intel Mac OS X 11_2_3)" /*(X11; Linux x86_64)*//*(Windows NT 10.0; Win64; x64)*
-		 : "(iPhone; CPU iPhone OS 14_4 like Mac OS X)"
-		 )
-		 );*/ // For Desktop side toggle
+		webSettings.setUserAgentString(
+			webSettings.getUserAgentString()
+			.replace(
+				webSettings.getUserAgentString()
+				.substring(
+					webSettings.getUserAgentString().indexOf("("),
+					webSettings.getUserAgentString().indexOf(")") + 1
+				),
+				DesktopMode 
+				? "(Macintosh; Intel Mac OS X 11_2_3)" /*(X11; Linux x86_64)*//*(Windows NT 10.0; Win64; x64)*/
+				: "(iPhone; CPU iPhone OS 14_4 like Mac OS X)"
+			)
+		); // For Desktop side toggle
         //webSettings.setSupportZoom(true);
 		webSettings.setBuiltInZoomControls(BuiltInZoomControls);
 		webSettings.setDisplayZoomControls(DisplayZoomControls);
