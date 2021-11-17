@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        
+        <item name="android:forceDarkAllowed">true</item>
+		<item name="android:isLightTheme">true</item>
+		
+		<item name="windowActionBar">false</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowFullscreen">true</item>
+		
+		<!-- to hide white screen in start of window -->
+		<item name="android:windowIsTranslucent">true</item>
+		
+		<!--item name="android:padding">0.0dip</item>
+		
+		<item name="android:paddingTop">0.0dip</item>
+		<item name="android:paddingRight">0.0dip</item>
+		<item name="android:paddingBottom">0.0dip</item>
+		-->
+    </style>
+
+</resources>
+<!--
+	@android:style/Theme.Holo.NoActionBar.Fullscreen
+	
+	<item name="android:isLightTheme">false</item>
+-->
+
