@@ -95,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
 		left_nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 				@Override
 				public boolean onNavigationItemSelected(MenuItem item) {			
-					refreshWebView(
-						item.getTitle().toString().equals("Search")
+					refreshWebView("https://"+
+						(item.getTitle().toString().equals("•Search")
 						? GoogleLinks.BASE.replace(".", "")
 						: item.getTitle().toString().toLowerCase().replace(" ", "") + GoogleLinks.BASE
-					);
+					));
 					drawer_layout.closeDrawers();
 					return true;
 				}
