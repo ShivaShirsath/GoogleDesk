@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 					Toast.makeText(getApplicationContext(), "Failed loading app!", Toast.LENGTH_SHORT).show();
 				}
 				@Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
-					if (url.contains("google")) {
+					if (url.contains("google") || url.contains("youtube")) {
 						view.loadUrl(url);
 					} else {
 						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
