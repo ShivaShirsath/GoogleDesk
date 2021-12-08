@@ -96,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
 				@Override
 				public boolean onNavigationItemSelected(MenuItem item) {			
 					refreshWebView("https://"+
-						(item.getTitle().toString().equals("•Search")
-						? GoogleLinks.BASE.replace(".", "")
-						: item.getTitle().toString().toLowerCase().replace(" ", "") + GoogleLinks.BASE
-					));
+								   (item.getTitle().toString().equals("•Search")
+								   ? GoogleLinks.BASE.replace(".", "")
+								   : item.getTitle().toString().toLowerCase().replace(" ", "") + GoogleLinks.BASE
+								   ));
 					drawer_layout.closeDrawers();
 					return true;
 				}
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 				@Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
 					if (url.contains("google")) {
-							view.loadUrl(url);
+						view.loadUrl(url);
 					} else {
 						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
 					}
