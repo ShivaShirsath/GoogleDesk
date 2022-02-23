@@ -34,6 +34,8 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.ArrayAdapter;
 import android.text.TextWatcher;
 import android.text.Editable;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,20 +96,20 @@ public class MainActivity extends AppCompatActivity {
 			refreshWebView(link);
 		}
 	}
-    private boolean contains(String str){
+    private boolean contains(String str, boolean as){
         boolean is=false;
         for(String s : getResources().getStringArray(R.array.search)){
            is = is | str.contains(s); 
         }
-        return is;
+        return is & as;
     }
-    private String getApp(String str){
-        return contains(str.toString()) ?
-            "https://" + (
-                str.equals("•Search")
-                    ? GoogleLinks.BASE.replace(".", "")
-                    : str.toLowerCase().replace(" ", "") + GoogleLinks.BASE
-            ) : "https://www.google.com/search?q=" + str
+    private String getApp(String str, boolean is){
+        if (contains(str, is)){
+            drawer_layout.closeDrawers();
+        }
+        return contains(str, is) ?
+            "https://" + str.toLowerCase().replace(" ", "") + GoogleLinks.BASE
+            : "https://www.google.com/search?q=" + str
         ;
     }
 	private void setDrawers() {
@@ -131,15 +133,21 @@ public class MainActivity extends AppCompatActivity {
                 @Override public void beforeTextChanged(CharSequence str, int s, int c, int a) {}
                 @Override public void afterTextChanged(Editable e) {}
                 @Override public void onTextChanged(CharSequence str, int s, int b, int e) {
-                    refreshWebView(getApp(str.toString()));
+                    refreshWebView(getApp(str.toString(), false));
                 }
             }
-        );		
+        );
+        search.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                    refreshWebView(getApp(((String)adapter.getItemAtPosition(position)).toString(), true));
+                }
+            });
 
 		left_nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 				@Override
 				public boolean onNavigationItemSelected(MenuItem item) {			
-					refreshWebView(getApp(item.getTitle().toString()));
+					refreshWebView(getApp(item.getTitle().toString(), true));
 					drawer_layout.closeDrawers();
 					return true;
 				}
