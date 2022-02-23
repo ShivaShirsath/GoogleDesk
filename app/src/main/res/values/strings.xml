@@ -1,4 +1,40 @@
 <resources>
     <string name="app_name">Google Desk</string>
     <string name="user_name">ShivaShirsath</string>
+    
+    <string-array name="search">
+        <item>•Search</item>
+        
+        <item>Assistant</item>
+        
+        <item>Calendar</item>
+        <item>Chat</item>
+        <item>Classroom</item>
+        <item>Colab . Research</item>
+        <item>Contacts</item>
+        
+        <item>Docs</item>
+        <item>Drive</item>
+        <item>Duo</item>
+        
+        <item>Forms</item>
+        
+        <item>Keep</item>
+        
+        <item>Mail</item>
+        <item>Maps</item>
+        <item>Meet</item>
+        <item>My Account</item>
+        
+        <item>Photos</item>
+        <item>Play</item>
+        
+        <item>Sheets</item>
+        <item>Sites</item>
+        <item>Slides</item>
+        
+        <item>Translate</item>
+
+    </string-array>
+    
 </resources>

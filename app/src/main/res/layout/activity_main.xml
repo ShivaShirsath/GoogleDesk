@@ -21,8 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-
-        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        android:background="#11ff8800" 
         app:menu="@menu/left" />
 
     <android.support.design.widget.NavigationView
@@ -31,9 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-
-        android:fitsSystemWindows="true"
+        android:background="#1133dd33" 
         app:menu="@menu/right" />
-	<!-- android:background="#00000000" -->
+	<!--
+        android:fitsSystemWindows="true"
+        android:background="#00000000" 
+    -->
 
 </android.support.v4.widget.DrawerLayout>

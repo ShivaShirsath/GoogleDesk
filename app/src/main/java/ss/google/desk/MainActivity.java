@@ -30,6 +30,10 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 import java.io.File;
 import java.util.Date;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.ArrayAdapter;
+import android.text.TextWatcher;
+import android.text.Editable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private DrawerLayout drawer_layout;
 	private NavigationView left_nav, right_nav;
+    private MultiAutoCompleteTextView search;
 
 	private boolean
 	DesktopMode = false, 
@@ -74,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 		} catch (Exception e) {
 			Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 		}
+        
+        
 	}
 	private void loadAll() {
 		if (
@@ -87,19 +94,52 @@ public class MainActivity extends AppCompatActivity {
 			refreshWebView(link);
 		}
 	}
+    private boolean contains(String str){
+        boolean is=false;
+        for(String s : getResources().getStringArray(R.array.search)){
+           is = is | str.contains(s); 
+        }
+        return is;
+    }
+    private String getApp(String str){
+        return contains(str.toString()) ?
+            "https://" + (
+                str.equals("•Search")
+                    ? GoogleLinks.BASE.replace(".", "")
+                    : str.toLowerCase().replace(" ", "") + GoogleLinks.BASE
+            ) : "https://www.google.com/search?q=" + str
+        ;
+    }
 	private void setDrawers() {
-		drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		left_nav = (NavigationView) findViewById(R.id.left_nav);
-		right_nav = (NavigationView) findViewById(R.id.right_nav);
+
+        drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        left_nav = (NavigationView) findViewById(R.id.left_nav);
+        right_nav = (NavigationView) findViewById(R.id.right_nav);
+
+        search = (MultiAutoCompleteTextView)left_nav.inflateHeaderView(R.layout.nav_header).findViewById(R.id.search);
+        search.setTokenizer(new SpaceTokenizer());
+        search.setAdapter(
+            new ArrayAdapter<String>(
+                this, 
+                android.R.layout.simple_expandable_list_item_1, 
+                getResources().getStringArray(R.array.search)
+            )
+        );
+
+        search.addTextChangedListener(
+            new TextWatcher(){
+                @Override public void beforeTextChanged(CharSequence str, int s, int c, int a) {}
+                @Override public void afterTextChanged(Editable e) {}
+                @Override public void onTextChanged(CharSequence str, int s, int b, int e) {
+                    refreshWebView(getApp(str.toString()));
+                }
+            }
+        );		
 
 		left_nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 				@Override
 				public boolean onNavigationItemSelected(MenuItem item) {			
-					refreshWebView("https://"+
-								   (item.getTitle().toString().equals("•Search")
-								   ? GoogleLinks.BASE.replace(".", "")
-								   : item.getTitle().toString().toLowerCase().replace(" ", "") + GoogleLinks.BASE
-								   ));
+					refreshWebView(getApp(item.getTitle().toString()));
 					drawer_layout.closeDrawers();
 					return true;
 				}
